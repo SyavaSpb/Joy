@@ -1,0 +1,15 @@
+width
+height
+
+box-sizing
+
+display
+
+margin
+padding
+
+position
+
+font family
+font wight
+font size
