@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Brandon";
+  src: url('./brandon_med.otf') format("opentype");
+}
+@font-face {
+  font-family: "Brandon light";
+  src: url('./brandon_light.otf') format("opentype");
+}

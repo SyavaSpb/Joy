@@ -1,0 +1,212 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  width: 100%;
+  height: 80px;
+
+  background-color: #fff;
+}
+
+.header__logo {
+  position: relative;
+  z-index: 12;
+  width: 80px;
+  height: 80px;
+  background-color: #22252c;
+  /* pointer-events: none; */
+}
+.header__logoIcon {
+  width: auto;
+  height: 40%;
+  fill: #fff;
+}
+.header__suplogo {
+  position: absolute;
+  top: 0;
+  left: 80px;
+  z-index: 11;
+  width: 130px;
+  height: 80px;
+  background-color: #22252c;
+  transform: translateX(-100%);
+  transition: transform .5s ease;
+}
+.header__suplogoIcon {
+  width: 90%;
+  height: auto;
+  fill: #fff;
+}
+.header__logo:hover + .header__suplogo,
+.header__suplogo:hover {
+  transform: translateX(0%);
+}
+@media (max-width: 900px) {
+  .header__logo {
+    width: calc(100% - 80px);
+  }
+  .header__suplogo {
+    display: none;
+  }
+}
+
+.header__nav  {
+  position: absolute;
+  top: 0;
+  right: 80px;
+  z-index: 11;
+  height: 100%;
+}
+
+.header__link-text {
+  display: inline-block;
+  height: 100%;
+  padding: 0 1.5vw;
+
+  line-height: 80px;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #22252c;
+
+  transition: color 0.2s linear, opacity 0.2s linear, transform 0.2s ease;
+}
+.header__link-text:hover {
+  color: #e2e2eb;
+}
+
+.nav__text__bt {
+  position: absolute;
+  right: 1.5vw;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header__link-icon {
+  display: inline-block;
+  height: 100%;
+  width: 80px;
+
+  line-height: 80px;
+  text-align: center;
+
+  border-left: 1px solid #e2e2eb;
+
+  transition: transform 0.2s ease, opacity 0.2s linear;
+}
+.header__link-icon svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  fill: #22252c;
+  transition: fill 0.1s linear;
+}
+.header__link-icon:hover svg {
+  fill: #e2e2eb;
+}
+/* animation */
+@media (min-width: 900px) {
+  .header__nav > * {
+    display: none;
+  }
+  .header__nav .nav__text__bt {
+    display: inline-block;
+  }
+  .header__nav-hide > * {
+    display: inline-block;
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  .header__nav-hide .nav__text__bt {
+    display: inline-block;
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  .header__nav-active > * {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  .header__nav-active .nav__text__bt {
+    display: none;
+  }
+  .header__link-text:nth-child(2) {
+    transition: color 0.2s linear, opacity 0.2s linear 0.45s, transform 0.2s ease 0.45s;
+  }
+  .header__link-text:nth-child(3) {
+    transition: color 0.2s linear, opacity 0.2s linear 0.4s, transform 0.2s ease 0.4s;
+  }
+  .header__link-text:nth-child(4) {
+    transition: color 0.2s linear, opacity 0.2s linear 0.35s, transform 0.2s ease 0.35s;
+  }
+  .header__link-text:nth-child(5) {
+    transition: color 0.2s linear, opacity 0.2s linear 0.3s, transform 0.2s ease 0.3s;
+  }
+  .header__link-icon:nth-child(6) {
+    transition: color 0.2s linear, opacity 0.2s linear 0.25s, transform 0.2s ease 0.25s;
+  }
+  .header__link-icon:nth-child(7) {
+    transition: color 0.2s linear, opacity 0.2s linear 0.2s, transform 0.2s ease 0.2s;
+  }
+}
+@media (max-width: 900px) {
+  .header__nav {
+    top: calc(calc(100vh - 160px) * (-1));
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    background-color: #fff;
+    transition: transform 0.5s ease;
+  }
+  .header__nav-active {
+    transform: translateY(100%);
+  }
+  .header__link-text {
+    text-align: center;
+    height: auto;
+    display: block;
+  }
+  .nav__text__bt {
+    display: none;
+  }
+  .header__link-icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+  }
+  .header__link-icon:nth-child(6) {
+    margin-left: calc(50vw - 40px);
+  }
+  .header__link-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.button__menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 15;
+
+  width: 80px;
+  height: 80px;
+
+  line-height: 80px;
+  text-align: center;
+
+  border-left: 1px solid #e2e2eb;
+  border-bottom: 1px solid #e2e2eb;
+  background-color: #fff;
+
+  cursor: pointer;
+}
+.button__menu svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  fill: #22252c;
+}

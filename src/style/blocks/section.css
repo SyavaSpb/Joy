@@ -1,0 +1,27 @@
+.section {
+  width: calc(100% - 160px);
+
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .section {
+    width: 100%;
+  }
+}
+
+.setion__tittleContainer {
+  width: 100%;
+  background-color: #e8e8f2;
+}
+.setion__tittle {
+  display: inline-block;
+  width: 25%;
+  padding: 30px;
+
+  background-color: #a8acb7;
+}
+@media (max-width: 900px) {
+  .setion__tittle {
+    width: 50%;
+  }
+}

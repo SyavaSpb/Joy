@@ -1,5 +1,3 @@
-/* header */
-  /* true<900px   false>900px*/
 let flagSize
 function unitFlagSize() {
   if (document.documentElement.clientWidth < 900) {
@@ -12,96 +10,14 @@ function resizeFlagSize() {
   if (document.documentElement.clientWidth < 900 && !flagSize ||
       document.documentElement.clientWidth >= 900 && flagSize) {
     flagSize = !flagSize
-    const menu = document.querySelector('.nav')
-    if (menu.classList.contains('nav__active')) {
-      menu.classList.remove('nav__active')
-      menu.classList.remove('nav__hide')
+    const menu = document.querySelector('.header__nav')
+    if (menu.classList.contains('header__nav-active')) {
+      menu.classList.remove('header__nav-active')
+      menu.classList.remove('header__nav-hide')
     }
   }
 }
 
-  /* menu */
-const menuButton = document.querySelector('.button__menu')
-menuButton.onclick = function() {
-  const menu = document.querySelector('.nav')
-  if (menu.classList.contains('nav__active')) {
-    menu.classList.remove('nav__active')
-    setTimeout(() =>{
-      menu.classList.remove('nav__hide')
-    }, 700)
-  } else {
-    menu.classList.add('nav__hide')
-    setTimeout(() =>{
-      menu.classList.add('nav__active')
-    }, 200)
-  }
-}
-document.querySelector('.nav__text__bt').onclick = menuButton.onclick
-
-
-
-
-/* works */
-const works = document.querySelectorAll('.works__item')
-works.forEach(item => {
-  item.onmouseover = function() {
-    const descr = this.querySelector('.work__description')
-    const w = this.offsetWidth, h = this.offsetHeight;
-    const x = event.clientX - this.getBoundingClientRect().x,
-          y = event.clientY - this.getBoundingClientRect().y
-    const delTop = y,
-          delBottom = h - y,
-          delLeft = x,
-          delRight = w - x
-
-    const minimum = Math.min(Math.min(delTop, delBottom), Math.min(delLeft, delRight))
-    if (minimum == delTop) {
-      descr.style.transform = 'translateY(-100%)'
-    } else if (minimum == delBottom) {
-      descr.style.transform = 'translateY(100%)'
-    } else if (minimum == delLeft) {
-      descr.style.transform = 'translateX(-100%)'
-    } else if (minimum == delRight) {
-      descr.style.transform = 'translateX(100%)'
-    }
-
-    setTimeout(() => {
-      descr.style.transition = 'transform .1s linear'
-      descr.style.zIndex = '1'
-      descr.style.transform = 'translate(0%, 0%)'
-    }, 10)
-    descr.ontransitionend = function() {}
-  }
-  item.onmouseout = function() {
-    const descr = this.querySelector('.work__description')
-    const w = this.offsetWidth, h = this.offsetHeight;
-    const x = event.clientX - this.getBoundingClientRect().x,
-          y = event.clientY - this.getBoundingClientRect().y
-    const delTop = y,
-          delBottom = h - y,
-          delLeft = x,
-          delRight = w - x
-
-    const minimum = Math.min(Math.min(delTop, delBottom), Math.min(delLeft, delRight))
-    if (minimum == delTop) {
-      descr.style.transform = 'translateY(-100%)'
-    } else if (minimum == delBottom) {
-      descr.style.transform = 'translateY(100%)'
-    } else if (minimum == delLeft) {
-      descr.style.transform = 'translateX(-100%)'
-    } else if (minimum == delRight) {
-      descr.style.transform = 'translateX(100%)'
-    }
-
-    descr.ontransitionend = function() {
-      this.style.removeProperty('transition');
-      descr.style.zIndex = '-10'
-    }
-  }
-})
-
-
-/* Slider */
 const intro = document.querySelector('.intro')
 const sliderContainer = document.querySelector('.slider__container')
 const slider = document.querySelector('.slider')
@@ -118,6 +34,7 @@ function resizeWorks() {
 
   width = getComputedStyle(slider.querySelector('.slider__item')).width
   width = Number.parseFloat(width.substring(0, width.length - 2))
+  width += 0.54
 
   amountVisibleItems = Math.round(widthContainer / width)
 
@@ -140,52 +57,39 @@ function front() {
 
   /* slidebar */
 const slidebar = document.querySelector('.slider__bar')
-// window.onload = function() {
-//   slidebar.style.transition = 'transform 2.0s linear'
-//   slidebar.classList.add('slider__bar__1')
-//   slider.style.transition = 'transform 0.5s ease'
-// }
 slidebar.ontransitionend = function() {
-  setTimeout(() => {
-    if (slidebar.classList.contains('slider__bar__1')) {
-      slidebar.classList.remove('slider__bar__1')
-      slidebar.classList.add('slider__bar__2')
-      intro.style.backgroundImage = `url("${slider__items[numberSliderItem + 1].dataset.img}")`
-    } else if (slidebar.classList.contains('slider__bar__2')) {
-      slidebar.classList.remove('slider__bar__2')
-      slidebar.classList.add('slider__bar__3')
-      intro.style.backgroundImage = `url("${slider__items[numberSliderItem + 2].dataset.img}")`
-    } else if (slidebar.classList.contains('slider__bar__3')) {
-      slidebar.classList.remove('slider__bar__3')
-      slidebar.classList.add('slider__bar__4')
-      intro.style.backgroundImage = `url("${slider__items[numberSliderItem + 3].dataset.img}")`
-    } else if (numberSliderItem < amountSliderItems - amountVisibleItems) {
-      front()
-      slidebar.style.removeProperty('transition')
-      slidebar.classList.remove('slider__bar__4')
-      slidebar.classList.add('slider__bar__3')
-      intro.style.backgroundImage = `url("${slider__items[numberSliderItem + 3].dataset.img}")`
-      setTimeout(() => {
-        slidebar.classList.remove('slider__bar__3')
-        slidebar.classList.add('slider__bar__4')
-        slidebar.style.transition = 'transform 3.0s linear'
-      }, 15)
-    } else {
-      slidebar.style.removeProperty('transition')
-      slidebar.classList.remove('slider__bar__4')
+  let sliderClass = slidebar.classList[1]
+  sliderClass = Number.parseInt(sliderClass.substring(13))
+  if (sliderClass < amountVisibleItems) {
+    slidebar.classList.remove(`slider__bar__${sliderClass}`)
+    slidebar.classList.add(`slider__bar__${sliderClass + 1}`)
+    intro.style.backgroundImage = `url("${slider__items[numberSliderItem + sliderClass].dataset.img}")`
+  } else if (numberSliderItem < amountSliderItems - amountVisibleItems) {
+    front()
+    slidebar.style.removeProperty('transition')
+    slidebar.classList.remove(`slider__bar__${sliderClass}`)
+    slidebar.classList.add(`slider__bar__${sliderClass - 1}`)
+    intro.style.backgroundImage = `url("${slider__items[numberSliderItem + sliderClass - 1].dataset.img}")`
+    setTimeout(() => {
+      slidebar.classList.remove(`slider__bar__${sliderClass - 1}`)
+      slidebar.classList.add(`slider__bar__${sliderClass}`)
+      slidebar.style.transition = 'transform 3.0s linear'
+    }, 15)
+  } else {
+    slidebar.style.removeProperty('transition')
+    slidebar.classList.remove(`slider__bar__${sliderClass}`)
 
-      numberSliderItem = 0
-      slider.style.transform = `translateX(-${numberSliderItem * width}px)`
-      sliderFront.classList.remove('slider__button__deactive')
-      sliderBack.classList.add('slider__button__deactive')
-      intro.style.backgroundImage = `url("${slider__items[numberSliderItem].dataset.img}")`
+    numberSliderItem = 0
+    slider.style.transform = `translateX(-${numberSliderItem * width}px)`
+    sliderFront.classList.remove('slider__button__deactive')
+    sliderBack.classList.add('slider__button__deactive')
+    intro.style.backgroundImage = `url("${slider__items[numberSliderItem].dataset.img}")`
 
-      setTimeout(() => {
-        slidebar.classList.add('slider__bar__1')
-        slidebar.style.transition = 'transform 3.0s linear'
-      }, 15)
-    }
-  }, 15)
+    setTimeout(() => {
+      slidebar.classList.add('slider__bar__1')
+      slidebar.style.transition = 'transform 3.0s linear'
+    }, 15)
+  }
 }
 
   /* select slider__item*/
@@ -269,8 +173,14 @@ let deltaX
 slider.onmousedown = function() {
   this.style.removeProperty('transition');
   isMouseDown = true
-  mouseX = event.clientX
+  if (event.clientX) {
+    mouseX = event.clientX
+  }
+  if (event.touches) {
+    mouseX = event.touches[0].screenX
+  }
 }
+slider.ontouchstart = slider.onmousedown
 slider.onmouseup = function() {
   isMouseDown = false
   const deltaItems = Math.round(deltaX / width)
@@ -300,16 +210,20 @@ slider.onmouseup = function() {
     }
   }
 }
+slider.ontouchend = slider.onmouseup
 slider.onmousemove = function() {
   if (!isMouseDown) return
-  deltaX = mouseX - event.clientX
+  if (event.clientX) {
+    deltaX = mouseX - event.clientX
+  }
+  if (event.touches) {
+    deltaX = mouseX - event.touches[0].screenX
+  }
   let translateValue = numberSliderItem * width + deltaX
   translateValue = Math.min(numberSliderItem * width + deltaX, (amountSliderItems - amountVisibleItems) * width)
   slider.style.transform = `translateX(-${translateValue}px)`
 }
-
-
-
+slider.ontouchmove = slider.onmousemove
 
 /* window */
 window.onload = function() {
@@ -324,13 +238,3 @@ window.onresize = function() {
   resizeWorks()
   resizeFlagSize()
 }
-
-
-
-
-
-
-
-
-
-/* */

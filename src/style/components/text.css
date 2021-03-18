@@ -1,0 +1,17 @@
+.text-clean { text-decoration: none; }
+
+.text-brandon { font-family: "Brandon"; }
+.text-brandon-light { font-family: "Brandon light"; }
+
+.text-l { font-size: 27px; }
+.text-xm { font-size: 22px; }
+.text-m { font-size: 16px; }
+
+.text-bold { font-weight: bold; }
+.text-nrom { font-weight: normal; }
+.text-lighter { font-weight: lighter; }
+
+.text-up { text-transform: uppercase; }
+
+.text-darkBlue { color: #22252c; }
+.text-white { color: #ffffff; }
