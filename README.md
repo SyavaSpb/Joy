@@ -1,6 +1,10 @@
 # Joy
 http://saveliyportfolio.ru/joy/index.html  
-html, css, js, gulp
+### Технологии
+ + html
+ + css
+ + js
+ + gulp
 ### Особенности:
  + Адаптивность
  + Модальное окно на телефонах
